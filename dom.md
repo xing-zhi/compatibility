@@ -25,7 +25,7 @@ function getElementsByClassName(className, node = document) {
 元素的位置包括在视口中的位置和文档中的位置，而两者之间的转换通过页面滚动偏移量完成。
 
 ## 获取元素的尺寸和在视口中的位置
-W3C标准的`getBoundingClientRect`方法返回包含元素在文档中位置（`left`、`right`、`top`和`bottom`）和尺寸（`width`和`height`）的对象，但是IE8-返回的对象不包含`width`和`height`属性。
+W3C标准的`getBoundingClientRect`方法返回包含元素的尺寸（`width`和`height`）和在视口中的位置（`left`、`right`、`top`和`bottom`）的对象，但是IE8-返回的对象不包含`width`和`height`属性。
 
 为了兼容IE8-，在使用`width`和`height`属性时需要检查这两个属性是否存在，同时提供后备。
 
