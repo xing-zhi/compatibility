@@ -23,5 +23,16 @@ if ( !Function.prototype.bind ) {
 }
 {% endhighlight %}
 
+# 数组方法
+## Array.isArray
+兼容性：IE9+
 
+polyfill，使用`Object.prototype.toString`方法。
 
+```javascript
+if ( !Array.isArray ) {
+  Array.isArray = function(arr) {
+    return Object.prototype.toString.call(arr) === '[object Array]';
+  };
+}
+```
