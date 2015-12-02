@@ -36,3 +36,49 @@ if ( !Array.isArray ) {
   };
 }
 ```
+
+## Array.prototype.every
+兼容性： IE9+
+
+polyfill，使用普通的`for`循环。
+
+```javascript
+if ( !Array.prototype.every ) {
+  Array.prototype.every = function(cb, context) {
+    const arr = this;
+
+    context = context || this;
+
+    for ( let i = 0, len = arr.length; i < len; i++ ) {
+      if ( !cb.call(context, arr[i], i, arr) ) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+}
+```
+
+## Array.prototype.every
+兼容性： IE9+
+
+polyfill，使用普通的`for`循环。
+
+```javascript
+if ( !Array.prototype.every ) {
+  Array.prototype.every = function(cb, context) {
+    const arr = this;
+
+    context = context || this;
+
+    for ( let i = 0, len = arr.length; i < len; i++ ) {
+      if ( !cb.call(context, arr[i], i, arr) ) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+}
+```
