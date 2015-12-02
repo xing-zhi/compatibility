@@ -7,7 +7,7 @@
 
 polyfill，使用`Function.prototype.apply`和闭包。
 
-{% highlight javascript linenos %}
+```javascript
 if ( !Function.prototype.bind ) {
   Function.prototype.bind = function(context) {
     var slice = Array.prototype.slice,
@@ -21,7 +21,7 @@ if ( !Function.prototype.bind ) {
     };
   };
 }
-{% endhighlight %}
+```
 
 # 数组方法
 ## Array.isArray
