@@ -248,3 +248,20 @@ if ( !Array.prototype.some ) {
   };
 }
 ```
+
+# String
+## String.prototype.trim
+兼容性： IE9+
+
+polyfill，使用`String.prototype.replace`实现。
+
+```javascript
+if ( !String.prototype.trim ) {
+  String.prototype.trim = function() {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/, '');
+  };
+}
+```
+
+
+
