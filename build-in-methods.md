@@ -60,25 +60,191 @@ if ( !Array.prototype.every ) {
 }
 ```
 
-## Array.prototype.every
+## Array.prototype.filter
 兼容性： IE9+
 
 polyfill，使用普通的`for`循环。
 
 ```javascript
-if ( !Array.prototype.every ) {
-  Array.prototype.every = function(cb, context) {
+if ( !Array.prototype.filter ) {
+  Array.prototype.filter = function(cb, context) {
+    const arr = this,
+          filteredArr = [];
+
+    context = context || this;
+
+    for ( let i = 0, len = arr.length; i < len; i++ ) {
+      if ( cb.call(context, arr[i], i, arr) ) {
+        filteredArr.push(item[i]);
+      }
+    }
+
+    return filteredArr;
+  };
+}
+```
+
+## Array.prototype.forEach
+兼容性： IE9+
+
+polyfill，使用普通的`for`循环。
+
+```javascript
+if ( !Array.prototype.forEach ) {
+  Array.prototype.forEach = function(cb, context) {
     const arr = this;
 
     context = context || this;
 
     for ( let i = 0, len = arr.length; i < len; i++ ) {
-      if ( !cb.call(context, arr[i], i, arr) ) {
-        return false;
+      cb.call(context, arr[i], i, arr);
+    }
+  };
+}
+```
+
+## Array.prototype.indexOf
+兼容性： IE9+
+
+polyfill，使用普通的`for`循环。
+
+```javascript
+if ( !Array.prototype.indexOf ) {
+  Array.prototype.indexOf = function(searchValue, fromIndex = 0) {
+    const arr = this;
+
+    for ( let i = fromInex, len = arr.length; i < len; i++ ) {
+      if ( arr[i] === searchValue ) {
+        return i;
       }
     }
 
-    return true;
+    return -1;
+  };
+}
+```
+
+## Array.prototype.lastIndexOf
+兼容性： IE9+
+
+polyfill，使用普通的`for`循环。
+
+```javascript
+if ( !Array.prototype.indexOf ) {
+  Array.prototype.indexOf = function(searchValue, fromIndex) {
+    const arr = this;
+
+    fromIndex = fromIndex || arr.length - 1;
+
+    for ( let i = fromIndex; i > 0; i-- ) {
+      if ( arr[i] === searchValue ) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+}
+```
+
+## Array.prototype.map
+兼容性： IE9+
+
+polyfill，使用普通的`for`循环。
+
+```javascript
+if ( !Array.prototype.map ) {
+  Array.prototype.map = function(cb, context) {
+    const arr = this,
+          mapedArr = [];
+
+    context = context || this;
+
+    for ( let i = 0, len = arr.length; i < len; i++ ) {
+      mapedArr[i] = cb.call(context, arr[i], i, arr);
+    }
+  };
+
+  return mapedArr;
+}
+```
+
+## Array.prototype.reduce
+兼容性： IE9+
+
+polyfill，使用普通的`for`循环。
+
+```javascript
+if ( !Array.prototype.reduce ) {
+  Array.prototype.reduce = function(cb, initialValue) {
+    const arr = this;
+    let startIndex = 0;
+
+    if ( arguments.length === 1 ) {
+      initialValue = arr[0];
+      startIndex = 1;
+    }
+
+    let reducedValue = initialValue;
+
+    for ( let i = startIndex, len = arr.length; i < len; i++ ) {
+      reducedValue = cb.call(this, reducedValue, arr[i], i, arr);
+    }
+
+    return reducedValue;
+  };
+
+
+}
+```
+
+## Array.prototype.reduceRight
+兼容性： IE9+
+
+polyfill，使用普通的`for`循环。
+
+```javascript
+if ( !Array.prototype.reduceRight ) {
+  Array.prototype.reduceRight = function(cb, initialValue) {
+    const arr = this,
+          len = arr.length;
+    let startIndex = len - 1;
+
+    if ( arguments.length === 1 ) {
+      initialValue = arr[len - 1];
+      startIndex = len - 2;
+    }
+
+    let reducedValue = initialValue;
+
+    for ( let i = startIndex; i >= 0; i-- ) {
+      reducedValue = cb.call(this, reducedValue, arr[i], i, arr);
+    }
+
+    return reducedValue;
+  };
+}
+```
+
+## Array.prototype.some
+兼容性： IE9+
+
+polyfill，使用普通的`for`循环。
+
+```javascript
+if ( !Array.prototype.some ) {
+  Array.prototype.some = function(cb, context) {
+    const arr = this;
+
+    context = context || this;
+
+    for ( let i = 0, len = arr.length; i < len; i++ ) {
+      if ( cb.call(context, arr[i], i, arr) ) {
+        return true;
+      }
+    }
+
+    return false;
   };
 }
 ```
