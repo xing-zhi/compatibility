@@ -263,5 +263,64 @@ if ( !String.prototype.trim ) {
 }
 ```
 
+# Object
+Object对象的方法只涉及到常用的，即`Object.create`和`Object.keys`。
 
+## Object.create
+兼容性： IE9+
 
+polifill，使用构造函数实现。
+
+```javascript
+if ( !Object.create ) {
+  Object.create = function(obj) {
+    const fn = function() {},
+          hasOwn = Object.prototype.hasOwnProperty;    
+
+    if ( obj !== null && Object.prototype.toString.call(obj) !== '[object Object]' ) {
+      throw TypeError('Object prototype must be an Object or null');
+    }
+
+    fn.prototype = obj;
+
+    const newObj = new fn();
+
+    if ( arguments[1] ) {
+      const properties = Object(arguments[1]);
+
+      for ( let key in properties ) {
+        if ( hasOwn.call(properties, key) ) {
+          newObj[key] = properties[key];
+        }
+      }
+    }
+
+    return newObj;
+  };
+}
+```
+
+## Object.keys
+兼容性： IE9+
+
+polyfill，使用`for...in`实现。
+```javascript
+if ( !Object.keys ) {
+  Object.keys = function(obj) {
+    const hasOwn = Object.prototype.hasOwnProperty,
+          keys = [];
+
+    if ( obj !== null && Object.prototype.toString.call(obj) !== '[object Object]' ) {
+      return keys;
+    }
+
+    for ( key in obj ) {
+      if ( hasOwn.call(obj, key) ) {
+        keys.push(key);
+      }
+    }
+
+    return keys;
+  }
+}
+```
